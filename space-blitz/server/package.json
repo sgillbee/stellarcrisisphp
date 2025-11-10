@@ -2,11 +2,12 @@
   "name": "space-blitz-server",
   "version": "1.0.0",
   "description": "Express server for Space Blitz game",
+  "type": "module",
   "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-esm src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "ts-node-esm src/server.ts",
     "lint": "eslint src/**/*.ts",
     "test": "vitest"
   },
