@@ -41,20 +41,21 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Space Blitz server is running' });
 });
 
-// Socket.IO connection handling
-io.on('connection', (socket) => {
-  console.log('A user connected:', socket.id);
+// API routes
+import apiRouter from './routes/index.js';
+app.use('/api', apiRouter);
 
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-  });
+// Start game update scheduler
+import { GameUpdateService } from './services/game-update.js';
+import { WebSocketService } from './services/websocket.js';
+import { createApolloServer } from './graphql/server.js';
 
-  // Placeholder for game events
-  socket.on('join-game', (data) => {
-    console.log('User joined game:', data);
-    // TODO: Implement game joining logic
-  });
-});
+// Initialize services
+const wsService = new WebSocketService(io);
+let apolloServer: any;
+
+// WebSocket handling is now managed by WebSocketService
+// The service is initialized above and handles all socket connections
 
 if (process.env.NODE_ENV !== 'test') {
   // Start server
@@ -63,7 +64,13 @@ if (process.env.NODE_ENV !== 'test') {
   });
 
   // Connect to database asynchronously
-  connectDB().catch((err) => {
+  connectDB().then(async () => {
+    // Initialize Apollo Server
+    apolloServer = await createApolloServer();
+
+    // Start game update scheduler after DB connection
+    GameUpdateService.startScheduler();
+  }).catch((err) => {
     console.error('Database connection failed:', err);
   });
 }
