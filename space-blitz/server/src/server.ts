@@ -4,6 +4,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -17,6 +18,18 @@ const io = new Server(server, {
 });
 
 const PORT = process.env.PORT || 3001;
+
+// Database connection
+const connectDB = async () => {
+  try {
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/space-blitz';
+    await mongoose.connect(mongoURI);
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.error('MongoDB connection error:', error instanceof Error ? error.message : error);
+    console.log('Server will continue without database connection');
+  }
+};
 
 // Middleware
 app.use(helmet());
@@ -44,9 +57,13 @@ io.on('connection', (socket) => {
 });
 
 if (process.env.NODE_ENV !== 'test') {
+  // Start server
   server.listen(PORT, () => {
     console.log(`Space Blitz server running on port ${PORT}`);
   });
-}
 
-export default app;
+  // Connect to database asynchronously
+  connectDB().catch((err) => {
+    console.error('Database connection failed:', err);
+  });
+}
