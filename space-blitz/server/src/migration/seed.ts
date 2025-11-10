@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
-import { User, Series, Game, Player, System, Ship, Fleet } from '../models/index.js';
+import { User } from '../models/User.js';
+import { Series } from '../models/Series.js';
+import { Game } from '../models/Game.js';
+import { Player } from '../models/Player.js';
+import { System } from '../models/System.js';
+import { Ship } from '../models/Ship.js';
+import { Fleet } from '../models/Fleet.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -379,7 +385,7 @@ async function seedDatabase() {
 }
 
 // Run seeding if this script is executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url.replace(/^file:\/\/\//, '').replace(/\\/g, '/') === process.argv[1].replace(/\\/g, '/')) {
   seedDatabase()
     .then(() => {
       console.log('Seeding completed successfully');

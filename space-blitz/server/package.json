@@ -5,11 +5,11 @@
   "type": "module",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-esm src/server.ts",
+    "dev": "tsx src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "migrate": "node --loader ts-node-esm src/migration/index.ts",
-    "seed": "node --loader ts-node-esm src/migration/seed.ts",
+    "migrate": "npx tsx src/migration/index.ts",
+    "seed": "npx tsx src/migration/seed.ts",
     "lint": "eslint src/**/*.ts",
     "test": "vitest"
   },
@@ -33,6 +33,7 @@
     "eslint": "^8.45.0",
     "supertest": "^6.3.3",
     "ts-node": "^10.9.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.0.0",
     "vitest": "^1.0.0"
   },
