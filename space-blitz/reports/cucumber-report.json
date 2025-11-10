@@ -1,0 +1,1041 @@
+[
+  {
+    "description": "  As a player in a game\n  I want to interact with the game interface\n  So that I can make strategic decisions",
+    "elements": [
+      {
+        "description": "",
+        "id": "game-interface-and-controls;view-game-board",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "View game board",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 363999
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 416137600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am logged into Space Blitz",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7115500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I have joined a game",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 700384699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "I enter the game",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:113"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 42883499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "I should see the strategic map",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:117"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5018835800,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I should see my fleet positions",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:122"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "I should see available action buttons",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:127"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 77355499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 299199
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "game-interface-and-controls;make-a-move",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "Make a move",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 316600
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 416374100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am logged into Space Blitz",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5704099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I have joined a game",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 699087599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "it is my turn",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:132"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5017828899,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "I select a ship",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:138"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "I choose a destination",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:143"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "I click \"Move\"",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:69"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the ship should move to the new location",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:148"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "the turn should pass to the next player",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:153"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 64643700
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 280499
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "game-interface-and-controls;view-game-statistics",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "View game statistics",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 337899
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 384494700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am logged into Space Blitz",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 206200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I have joined a game",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 81862699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "I click on the \"Stats\" tab",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:158"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5011316199,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "I should see player rankings",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:162"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "I should see fleet compositions",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:167"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "I should see turn history",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:172"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 44231400
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 89899
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "game-interface-and-controls;real-time-game-updates",
+        "keyword": "Scenario",
+        "line": 31,
+        "name": "Real-time game updates",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 43899
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 360124500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am logged into Space Blitz",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 104400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I have joined a game",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:109"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 95234599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 32,
+            "name": "I am playing against another player",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:177"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "the other player makes a move",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:181"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 57499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 34,
+            "name": "I should see the move reflected immediately",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "I should receive a turn notification",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:189"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5015225000,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 58330999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 102100
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@flaky",
+            "line": 30
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "game-interface-and-controls",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Game Interface and Controls",
+    "tags": [],
+    "uri": "tests\\bdd\\features\\game-interface.feature"
+  },
+  {
+    "description": "  As a player\n  I want to join and manage games\n  So that I can participate in Space Blitz matches",
+    "elements": [
+      {
+        "description": "",
+        "id": "game-lobby-and-player-management;view-available-games",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "View available games",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 76199
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 350608200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the Space Blitz application is running",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2194100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am on the game lobby page",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113749700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "I visit the game lobby",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 27810999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "I should see a list of available games",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:26"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5005639199,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "each game should display its name and status",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:31"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 60061399
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 152399
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 10
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "game-lobby-and-player-management;join-an-existing-game",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Join an existing game",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 63299
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 352621300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the Space Blitz application is running",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 227100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am on the game lobby page",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 129719499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "there is an open game \"Test Game\"",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:43"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1634500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I click on \"Test Game\"",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:48"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5001951099,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "I should be redirected to the game page",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:52"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I should see the game interface",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:56"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 60554700
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 109099
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "game-lobby-and-player-management;create-a-new-game",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Create a new game",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 68899
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 371552700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the Space Blitz application is running",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1166899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am on the game lobby page",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 122692200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I click the \"Create Game\" button",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:61"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5011615000,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "I enter \"My New Game\" as the game name",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:65"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "I click \"Create\"",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:69"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "I should see \"My New Game\" in the games list",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:73"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the game status should be \"Waiting for players\"",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:78"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 66119200
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 103300
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "game-lobby-and-player-management;game-status-updates-in-real-time",
+        "keyword": "Scenario",
+        "line": 30,
+        "name": "Game status updates in real-time",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 67600
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 361738799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the Space Blitz application is running",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 177800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am on the game lobby page",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110483999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 31,
+            "name": "I am viewing the games list",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:83"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5001873100,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout.<anonymous> (C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\node_modules\\@cucumber\\cucumber\\src\\time.ts:52:14)\n    at listOnTimeout (node:internal/timers:588:17)\n    at processTimers (node:internal/timers:523:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "another player joins an existing game",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:88"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "the player count should update automatically",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:93"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "the game status should reflect the change",
+            "match": {
+              "location": "file:\\C:\\Users\\simon\\Projects\\stellarcrisisphp\\space-blitz\\tests\\bdd\\step-definitions\\game-steps.ts:100"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 68028699
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 142900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "game-lobby-and-player-management",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Game Lobby and Player Management",
+    "tags": [],
+    "uri": "tests\\bdd\\features\\game-lobby.feature"
+  }
+]
