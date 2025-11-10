@@ -8,20 +8,23 @@
     "dev": "ts-node-esm src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "migrate": "node --loader ts-node-esm src/migration/index.ts",
+    "seed": "node --loader ts-node-esm src/migration/seed.ts",
     "lint": "eslint src/**/*.ts",
     "test": "vitest"
   },
   "dependencies": {
-    "express": "^4.18.0",
-    "socket.io": "^4.7.0",
-    "mongoose": "^7.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
     "helmet": "^6.0.0",
-    "dotenv": "^16.0.0"
+    "mongoose": "^7.0.0",
+    "mysql2": "^3.15.3",
+    "socket.io": "^4.7.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.17",
     "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
     "@types/node": "^20.0.0",
     "@types/supertest": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -33,7 +36,12 @@
     "typescript": "^5.0.0",
     "vitest": "^1.0.0"
   },
-  "keywords": ["express", "typescript", "game", "server"],
+  "keywords": [
+    "express",
+    "typescript",
+    "game",
+    "server"
+  ],
   "author": "",
   "license": "ISC"
 }
