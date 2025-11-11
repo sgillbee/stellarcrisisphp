@@ -83,12 +83,14 @@ const ShipCard: React.FC<ShipCardProps> = ({ ship, onOrderChange, availableSyste
               {orderOptions.find(o => o.value === ship.orders)?.label || ship.orders}
               {ship.orderArguments && ` → ${ship.orderArguments}`}
             </span>
-            <button
-              className="btn btn-small btn-secondary"
-              onClick={() => setIsEditing(true)}
-            >
-              Change
-            </button>
+            {onOrderChange && (
+              <button
+                className="btn btn-small btn-secondary"
+                onClick={() => setIsEditing(true)}
+              >
+                Change
+              </button>
+            )}
           </div>
         ) : (
           <div className="order-editor">
