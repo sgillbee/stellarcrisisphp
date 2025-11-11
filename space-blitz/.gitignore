@@ -39,3 +39,5 @@ temp/
 
 # Test reports
 reports/
+coverage/
+server/coverage/
