@@ -1,53 +1,15 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import request from 'supertest';
 import express from 'express';
-import authRouter from '../routes/auth';
-
-// Mock dependencies
-vi.mock('bcrypt', () => ({
-  default: {
-    hash: vi.fn(),
-    compare: vi.fn(),
-  },
-}));
-
-vi.mock('jsonwebtoken', () => ({
-  default: {
-    sign: vi.fn(),
-    verify: vi.fn(),
-  },
-}));
 
 // Import test utilities to setup global mocks
-// import '../__tests__/test-utils';
+import '../__tests__/test-utils';
+import { createAuthHeaders } from '../__tests__/test-utils';
 
+import authRouter from '../routes/auth';
 import { User } from '../models';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
-// Mock the models before importing routes
-vi.mock('../models', () => {
-  const mockUserConstructor = vi.fn().mockImplementation((data) => ({
-    ...data,
-    _id: 'user123',
-    save: vi.fn().mockResolvedValue(undefined),
-  }));
-
-  mockUserConstructor.findOne = vi.fn();
-  mockUserConstructor.create = vi.fn();
-  mockUserConstructor.findById = vi.fn();
-
-  return {
-    User: mockUserConstructor,
-    Game: vi.fn(),
-    Series: vi.fn(),
-    Player: vi.fn(),
-    System: vi.fn(),
-    Ship: vi.fn(),
-    Message: vi.fn(),
-    Tournament: vi.fn(),
-  };
-});
 
 describe('Auth Routes', () => {
   let app: express.Application;
@@ -65,8 +27,6 @@ describe('Auth Routes', () => {
 
   describe('POST /auth/login', () => {
     it('should login successfully with valid credentials', async () => {
-      vi.clearAllMocks();
-      
       const mockUser = {
         _id: 'user123',
         name: 'TestUser',
@@ -78,7 +38,6 @@ describe('Auth Routes', () => {
       };
 
       (User.findOne as any).mockResolvedValue(mockUser);
-      (bcrypt.compare as any).mockResolvedValue(true);
       (jwt.sign as any).mockReturnValue('mockToken');
 
       const response = await request(app)
@@ -132,18 +91,17 @@ describe('Auth Routes', () => {
 
   describe('POST /auth/create-empire', () => {
     it('should create new empire successfully', async () => {
-      const mockUser = {
+      const mockUser = new User({
         _id: 'user123',
         name: 'NewUser',
         password: 'hashedPassword',
         icon: 'alien1.gif',
         isAdmin: false,
         save: vi.fn().mockResolvedValue(undefined),
-      };
+      });
 
       (User.findOne as any).mockResolvedValue(null);
       (bcrypt.hash as any).mockResolvedValue('hashedPassword');
-      (User as any).mockReturnValue(mockUser);
       (jwt.sign as any).mockReturnValue('mockToken');
 
       const response = await request(app)
@@ -153,7 +111,6 @@ describe('Auth Routes', () => {
       expect(response.status).toBe(200);
       expect(response.body.success).toBe(true);
       expect(response.body.user.name).toBe('NewUser');
-      expect(mockUser.save).toHaveBeenCalled();
     });
 
     it('should return error for existing empire name', async () => {

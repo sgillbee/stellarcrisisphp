@@ -47,16 +47,31 @@ describe('GameEngine', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-
+    
     // Reset mock implementations
     mockUnitOfWork.beginTransaction.mockResolvedValue(undefined);
     mockUnitOfWork.commit.mockResolvedValue(undefined);
     mockUnitOfWork.rollback.mockResolvedValue(undefined);
     mockUnitOfWork.dispose.mockResolvedValue(undefined);
+    mockUnitOfWork.games.updateGameMetadata.mockResolvedValue(undefined);
+    mockUnitOfWork.games.updateGameState.mockResolvedValue(undefined);
+    mockUnitOfWork.players.findByGame.mockResolvedValue([]);
+    mockUnitOfWork.players.updatePlayerResources.mockResolvedValue(undefined);
+    mockUnitOfWork.players.updatePlayerTech.mockResolvedValue(undefined);
+    mockUnitOfWork.players.updatePlayerStats.mockResolvedValue(undefined);
+    mockUnitOfWork.ships.findShipsWithOrders.mockResolvedValue([]);
+    mockUnitOfWork.ships.findByGame.mockResolvedValue([]);
+    mockUnitOfWork.ships.findByOwner.mockResolvedValue([]);
+    mockUnitOfWork.ships.update.mockResolvedValue(undefined);
+    mockUnitOfWork.ships.delete.mockResolvedValue(undefined);
+    mockUnitOfWork.ships.destroyShips.mockResolvedValue(undefined);
+    mockUnitOfWork.systems.findByOwner.mockResolvedValue([]);
+    mockUnitOfWork.systems.findByCoordinates.mockResolvedValue(null);
+    mockUnitOfWork.systems.colonizeSystem.mockResolvedValue(undefined);
+    mockUnitOfWork.messages.createMessage.mockResolvedValue(undefined);
+    mockUnitOfWork.history.createHistoryEntry.mockResolvedValue(undefined);
 
-    gameEngine = new GameEngine(mockUnitOfWork as any);
-
-    mockGame = {
+    gameEngine = new GameEngine(mockUnitOfWork as any);    mockGame = {
       _id: 'game123',
       seriesId: 'series123',
       updateCount: 0,

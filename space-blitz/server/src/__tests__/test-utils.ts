@@ -36,13 +36,27 @@ vi.mock('socket.io', () => ({
 // Mock Mongoose models with proper constructor support
 export const createMockModel = () => {
   const mockInstance = {
-    save: vi.fn(),
+    save: vi.fn().mockResolvedValue(undefined),
     remove: vi.fn(),
     toObject: vi.fn(),
     populate: vi.fn().mockReturnThis(),
   };
 
-  const mockModel = Object.assign(vi.fn(() => mockInstance), {
+  // Create a mock class that can be instantiated
+  class MockModel {
+    constructor(data?: any) {
+      Object.assign(this, mockInstance, data || {});
+    }
+
+    // Instance methods
+    save = vi.fn().mockResolvedValue(undefined);
+    remove = vi.fn();
+    toObject = vi.fn();
+    populate = vi.fn().mockReturnThis();
+  }
+
+  // Add static methods to the class
+  Object.assign(MockModel, {
     find: vi.fn(),
     findOne: vi.fn(),
     findById: vi.fn(),
@@ -55,7 +69,7 @@ export const createMockModel = () => {
     session: vi.fn().mockReturnThis(),
   });
 
-  return mockModel;
+  return MockModel;
 };
 
 // Mock all models
