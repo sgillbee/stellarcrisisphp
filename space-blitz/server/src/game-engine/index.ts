@@ -12,9 +12,9 @@ export class GameEngine {
    * Main game update function - equivalent to PHP update_game()
    */
   async updateGame(series: any, game: any, updateTime: Date): Promise<GameUpdateResult> {
-    await this.unitOfWork.beginTransaction();
-
     try {
+      await this.unitOfWork.beginTransaction();
+
       // Update game metadata
       game.updateCount += 1;
       game.lastUpdate = updateTime;
