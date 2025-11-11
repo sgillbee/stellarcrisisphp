@@ -51,3 +51,40 @@ export interface Planet {
   population?: number;
   resources: number;
 }
+
+export interface Tournament {
+  _id: string;
+  name: string;
+  series: string;
+  status: 'upcoming' | 'active' | 'completed';
+  startDate: Date;
+  endDate: Date;
+  maxPlayers: number;
+  currentPlayers: number;
+  prizePool: number;
+  winner?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Series {
+  _id: string;
+  name: string;
+  description: string;
+  gameType: string;
+  maxPlayers: number;
+  shipTypeOptions: ShipTypeOption[];
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ShipTypeOption {
+  type: string;
+  name: string;
+  description: string;
+  cost: number;
+  br: number;
+  fuelCapacity: number;
+  maintenanceCost: number;
+}

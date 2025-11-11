@@ -14,11 +14,56 @@
   color: #213547;
 }
 
+.admin-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.tab-button {
+  padding: 1rem 2rem;
+  border: none;
+  background: none;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: #213547;
+  background-color: #f8f9fa;
+}
+
+.tab-button.active {
+  color: #646cff;
+  border-bottom-color: #646cff;
+  background-color: #f8f9ff;
+}
+
 @media (max-width: 768px) {
   .page-header {
     flex-direction: column;
     gap: 1rem;
     align-items: flex-start;
+  }
+
+  .admin-tabs {
+    flex-direction: column;
+  }
+
+  .tab-button {
+    text-align: left;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+  }
+
+  .tab-button.active {
+    border-bottom: none;
+    border-left-color: #646cff;
   }
 }
 
@@ -29,5 +74,23 @@
 
   .page-header {
     border-bottom-color: #444;
+  }
+
+  .admin-tabs {
+    border-bottom-color: #444;
+  }
+
+  .tab-button {
+    color: #ccc;
+  }
+
+  .tab-button:hover {
+    color: #ffffff;
+    background-color: #2a2a2a;
+  }
+
+  .tab-button.active {
+    color: #646cff;
+    background-color: #1a1a1a;
   }
 }

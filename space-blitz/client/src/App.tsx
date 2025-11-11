@@ -6,6 +6,8 @@ import Auth from './components/Auth'
 import GameList from './components/games/GameList'
 import GameDetail from './components/games/GameDetail'
 import CreateGameForm from './components/games/CreateGameForm'
+import { TournamentList, TournamentCreateForm, TournamentBracket } from './components/tournaments'
+import { SeriesAdmin, UserAdmin } from './components/admin'
 import './App.css'
 
 // Placeholder components - will be implemented in subsequent tasks
@@ -50,21 +52,107 @@ const Games = () => {
   )
 }
 
-const Tournaments = () => (
-  <div>
-    <h1>Tournaments</h1>
-    <p>Tournament management</p>
-    <p>View ongoing tournaments, join competitions, or create new tournament series.</p>
-  </div>
-)
+const Tournaments = () => {
+  const [showCreateForm, setShowCreateForm] = useState(false)
+  const [selectedTournament, setSelectedTournament] = useState<string | null>(null)
 
-const Admin = () => (
-  <div>
-    <h1>Admin</h1>
-    <p>Administrative tools</p>
-    <p>Manage game series, users, and system settings.</p>
-  </div>
-)
+  const handleTournamentCreated = (tournament: any) => {
+    console.log('Tournament created:', tournament)
+    setShowCreateForm(false)
+    // TODO: Refresh tournament list
+  }
+
+  const handleTournamentSelect = (tournamentId: string) => {
+    setSelectedTournament(tournamentId)
+  }
+
+  if (selectedTournament) {
+    return (
+      <div>
+        <button
+          className="btn btn-secondary"
+          onClick={() => setSelectedTournament(null)}
+          style={{ marginBottom: '1rem' }}
+        >
+          ← Back to Tournaments
+        </button>
+        <TournamentBracket
+          tournament={{
+            _id: selectedTournament,
+            name: 'Sample Tournament',
+            series: 'Championship Series',
+            status: 'active',
+            startDate: new Date(),
+            endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+            maxPlayers: 8,
+            currentPlayers: 6,
+            prizePool: 500,
+            createdAt: new Date(),
+            updatedAt: new Date()
+          }}
+        />
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <div className="page-header">
+        <h1>Tournaments</h1>
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowCreateForm(true)}
+        >
+          Create Tournament
+        </button>
+      </div>
+
+      {showCreateForm ? (
+        <TournamentCreateForm
+          onTournamentCreated={handleTournamentCreated}
+          onCancel={() => setShowCreateForm(false)}
+        />
+      ) : (
+        <TournamentList
+          onTournamentSelect={handleTournamentSelect}
+          onCreateTournament={() => setShowCreateForm(true)}
+        />
+      )}
+    </div>
+  )
+}
+
+const Admin = () => {
+  const [activeTab, setActiveTab] = useState<'series' | 'users'>('series')
+
+  return (
+    <div>
+      <div className="page-header">
+        <h1>Administration</h1>
+      </div>
+
+      <div className="admin-tabs">
+        <button
+          className={`tab-button ${activeTab === 'series' ? 'active' : ''}`}
+          onClick={() => setActiveTab('series')}
+        >
+          Series Management
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'users' ? 'active' : ''}`}
+          onClick={() => setActiveTab('users')}
+        >
+          User Management
+        </button>
+      </div>
+
+      <div className="admin-content">
+        {activeTab === 'series' && <SeriesAdmin />}
+        {activeTab === 'users' && <UserAdmin />}
+      </div>
+    </div>
+  )
+}
 
 function App() {
   return (

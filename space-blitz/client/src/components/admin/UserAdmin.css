@@ -1,0 +1,342 @@
+.user-admin {
+  padding: 1rem;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #646cff;
+}
+
+.admin-header h2 {
+  margin: 0;
+  color: #213547;
+  font-size: 1.8rem;
+}
+
+.user-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat {
+  background-color: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.filters {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.search-box {
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: white;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-controls select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: white;
+  min-width: 120px;
+}
+
+.users-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.users-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #213547;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.users-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.username {
+  font-weight: 600;
+  color: #213547;
+}
+
+.email {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.role-select {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status.active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.last-login {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.stats {
+  text-align: center;
+  font-weight: 600;
+  color: #213547;
+}
+
+.actions {
+  text-align: center;
+}
+
+.btn {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.no-users {
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #ddd;
+}
+
+.no-users p {
+  margin: 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+  .users-table-container {
+    overflow-x: auto;
+  }
+
+  .users-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .user-stats {
+    flex-wrap: wrap;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .filter-controls {
+    justify-content: space-between;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 0.5rem;
+  }
+
+  .users-table th {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-admin {
+    padding: 0.5rem;
+  }
+
+  .admin-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .stat {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .search-box input,
+  .filter-controls select {
+    font-size: 0.85rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .admin-header h2 {
+    color: #ffffff;
+  }
+
+  .stat {
+    background-color: #2a2a2a;
+    color: #ccc;
+  }
+
+  .filters {
+    background-color: #1a1a1a;
+    border-color: #444;
+  }
+
+  .search-box input,
+  .filter-controls select {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #ffffff;
+  }
+
+  .users-table-container {
+    background: #1a1a1a;
+    border-color: #444;
+  }
+
+  .users-table th {
+    background-color: #2a2a2a;
+    color: #ffffff;
+  }
+
+  .users-table th,
+  .users-table td {
+    border-bottom-color: #444;
+  }
+
+  .users-table tbody tr:hover {
+    background-color: #2a2a2a;
+  }
+
+  .username {
+    color: #ffffff;
+  }
+
+  .email {
+    color: #ccc;
+  }
+
+  .last-login {
+    color: #ccc;
+  }
+
+  .stats {
+    color: #ffffff;
+  }
+
+  .no-users {
+    background-color: #1a1a1a;
+    border-color: #444;
+  }
+
+  .no-users p,
+  .loading {
+    color: #ccc;
+  }
+}

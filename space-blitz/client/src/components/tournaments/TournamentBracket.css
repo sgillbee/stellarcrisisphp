@@ -1,0 +1,305 @@
+.tournament-bracket {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bracket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #646cff;
+}
+
+.bracket-header h2 {
+  margin: 0;
+  color: #213547;
+  font-size: 1.5rem;
+}
+
+.bracket-info {
+  display: flex;
+  gap: 1rem;
+}
+
+.bracket-info span {
+  padding: 0.25rem 0.75rem;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.bracket-container {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.round {
+  flex: 1;
+  min-width: 250px;
+}
+
+.round-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #213547;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.matches {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.match {
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.match:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.match.completed {
+  border-color: #28a745;
+  background: #f8fff8;
+}
+
+.match.in-progress {
+  border-color: #ffc107;
+  background: #fffef8;
+}
+
+.match.pending {
+  border-color: #6c757d;
+  background: #f8f9fa;
+}
+
+.match-players {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.player.winner {
+  background: #d4edda;
+  border-color: #28a745;
+  font-weight: 600;
+}
+
+.player-name {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+.player-seed {
+  font-size: 0.8rem;
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+.vs {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 500;
+  margin: 0.25rem 0;
+}
+
+.match-result {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #28a745;
+  font-weight: 600;
+}
+
+.bracket-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.legend-color.completed {
+  background-color: #28a745;
+}
+
+.legend-color.in-progress {
+  background-color: #ffc107;
+}
+
+.legend-color.pending {
+  background-color: #6c757d;
+}
+
+.legend-item span {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .bracket-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .bracket-info {
+    flex-wrap: wrap;
+  }
+
+  .bracket-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .round {
+    min-width: auto;
+  }
+
+  .bracket-legend {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tournament-bracket {
+    padding: 0.5rem;
+  }
+
+  .bracket-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .match {
+    padding: 0.75rem;
+  }
+
+  .player {
+    padding: 0.375rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .tournament-bracket {
+    background: #1a1a1a;
+  }
+
+  .bracket-header h2 {
+    color: #ffffff;
+  }
+
+  .bracket-header {
+    border-bottom-color: #646cff;
+  }
+
+  .bracket-info span {
+    background-color: #2a2a2a;
+    color: #ccc;
+  }
+
+  .round-title {
+    color: #ffffff;
+  }
+
+  .match {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+
+  .match.completed {
+    background: #1a2a1a;
+  }
+
+  .match.in-progress {
+    background: #2a241a;
+  }
+
+  .player {
+    background: #333;
+    border-color: #555;
+  }
+
+  .player.winner {
+    background: #1a2a1a;
+    border-color: #28a745;
+  }
+
+  .player-name {
+    color: #ffffff;
+  }
+
+  .player-seed {
+    color: #ccc;
+  }
+
+  .vs {
+    color: #ccc;
+  }
+
+  .match-result {
+    border-top-color: #444;
+    color: #28a745;
+  }
+
+  .bracket-legend {
+    border-top-color: #444;
+  }
+
+  .legend-item span {
+    color: #ccc;
+  }
+}
