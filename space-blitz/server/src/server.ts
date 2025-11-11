@@ -74,3 +74,6 @@ if (process.env.NODE_ENV !== 'test') {
     console.error('Database connection failed:', err);
   });
 }
+
+// Export app for testing
+export { app, server, io };

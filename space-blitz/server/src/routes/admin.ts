@@ -1,5 +1,6 @@
 import express from 'express';
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import { User, Game, Series, Message } from '../models';
 
 const router = express.Router();
@@ -12,8 +13,7 @@ const requireAdmin = async (req: Request, res: Response, next: any) => {
   }
 
   try {
-    const jwt = require('jsonwebtoken');
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret') as any;
 
     const user = await User.findById(decoded.userId);
     if (!user || !user.isAdmin) {

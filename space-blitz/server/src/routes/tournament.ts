@@ -1,5 +1,6 @@
 import express from 'express';
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import { Tournament } from '../models';
 
 const router = express.Router();
@@ -12,7 +13,6 @@ const requireAuth = (req: Request, res: Response, next: any) => {
   }
 
   try {
-    const jwt = require('jsonwebtoken');
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret');
     (req as any).user = decoded;
     next();
