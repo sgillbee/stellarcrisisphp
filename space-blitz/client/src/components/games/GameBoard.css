@@ -1,0 +1,167 @@
+.game-board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.game-board-canvas {
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: #000011;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.board-legend {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #213547;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.legend-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ff9800;
+}
+
+.system-details {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  z-index: 1000;
+}
+
+.system-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.system-details-header h3 {
+  margin: 0;
+  color: #213547;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.system-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat label {
+  font-weight: 500;
+  color: #666;
+}
+
+.stat span {
+  font-weight: 600;
+  color: #213547;
+}
+
+@media (max-width: 768px) {
+  .board-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .system-details {
+    position: static;
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto;
+  }
+
+  .system-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .board-legend {
+    background-color: #2a2a2a;
+    border-color: #444;
+  }
+
+  .legend-item {
+    color: #ffffff;
+  }
+
+  .system-details {
+    background: #1a1a1a;
+    border-color: #444;
+  }
+
+  .system-details-header h3 {
+    color: #ffffff;
+  }
+
+  .close-btn {
+    color: #ccc;
+  }
+
+  .close-btn:hover {
+    color: #ffffff;
+  }
+
+  .stat label {
+    color: #ccc;
+  }
+
+  .stat span {
+    color: #ffffff;
+  }
+}

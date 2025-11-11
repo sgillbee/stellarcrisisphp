@@ -1,12 +1,12 @@
 // Repository interfaces
-export { IRepository } from './IRepository';
-export { IGameRepository } from './IGameRepository';
-export { IPlayerRepository } from './IPlayerRepository';
-export { IShipRepository } from './IShipRepository';
-export { ISystemRepository } from './ISystemRepository';
-export { IMessageRepository } from './IMessageRepository';
-export { IHistoryRepository } from './IHistoryRepository';
-export { IUnitOfWork } from './IUnitOfWork';
+export type { IRepository } from './IRepository';
+export type { IGameRepository } from './IGameRepository';
+export type { IPlayerRepository } from './IPlayerRepository';
+export type { IShipRepository } from './IShipRepository';
+export type { ISystemRepository } from './ISystemRepository';
+export type { IMessageRepository } from './IMessageRepository';
+export type { IHistoryRepository } from './IHistoryRepository';
+export type { IUnitOfWork } from './IUnitOfWork';
 
 // DTOs
 export * from './dto';

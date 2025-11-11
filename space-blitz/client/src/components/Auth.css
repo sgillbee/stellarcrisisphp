@@ -1,0 +1,62 @@
+.auth-page {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 1rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #666;
+}
+
+.tab-button:hover {
+  color: #213547;
+}
+
+.tab-button.active {
+  color: #646cff;
+  border-bottom-color: #646cff;
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 1rem;
+  }
+
+  .tab-button {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .auth-tabs {
+    border-bottom-color: #444;
+  }
+
+  .tab-button {
+    color: #ccc;
+  }
+
+  .tab-button:hover {
+    color: #ffffff;
+  }
+
+  .tab-button.active {
+    color: #646cff;
+  }
+}

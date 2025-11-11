@@ -1,0 +1,167 @@
+.fleet-list {
+  padding: 1rem;
+}
+
+.fleet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #646cff;
+}
+
+.fleet-header h3 {
+  margin: 0;
+  color: #213547;
+  font-size: 1.5rem;
+}
+
+.fleet-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat-item {
+  background-color: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.fleet-controls {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.filter-controls,
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-controls label,
+.sort-controls label {
+  font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.filter-controls select,
+.sort-controls select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: white;
+  min-width: 120px;
+}
+
+.ships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+.no-ships {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #ddd;
+}
+
+.no-ships p {
+  margin: 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .fleet-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .fleet-stats {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .fleet-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ships-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .fleet-list {
+    padding: 0.5rem;
+  }
+
+  .fleet-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .stat-item {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .filter-controls select,
+  .sort-controls select {
+    min-width: 100px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .fleet-header h3 {
+    color: #ffffff;
+  }
+
+  .stat-item {
+    background-color: #2a2a2a;
+    color: #ccc;
+  }
+
+  .fleet-controls {
+    background-color: #1a1a1a;
+    border-color: #444;
+  }
+
+  .filter-controls label,
+  .sort-controls label {
+    color: #ccc;
+  }
+
+  .filter-controls select,
+  .sort-controls select {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #ffffff;
+  }
+
+  .no-ships {
+    background-color: #1a1a1a;
+    border-color: #444;
+  }
+
+  .no-ships p {
+    color: #ccc;
+  }
+}
