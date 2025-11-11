@@ -41,3 +41,5 @@ temp/
 reports/
 coverage/
 server/coverage/
+test-results/
+playwright-report/

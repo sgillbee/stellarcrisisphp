@@ -9,39 +9,48 @@ test.describe('Space Blitz Game Lobby', () => {
   test('should display game interface elements', async ({ page }) => {
     await page.goto('/');
 
-    // Check for main heading
-    await expect(page.locator('h1')).toContainText('Space Blitz');
+    // Check for main heading in main content
+    await expect(page.locator('main h1')).toContainText('Space Blitz');
 
     // Check for description
-    await expect(page.locator('p')).toContainText('modern web-based strategy game');
+    await expect(page.getByText('Welcome to the modern web-based strategy game')).toBeVisible();
 
-    // Check for counter button
-    const button = page.locator('button');
-    await expect(button).toBeVisible();
-    await expect(button).toContainText('count is 0');
+    // Check for navigation menu
+    await expect(page.locator('nav')).toBeVisible();
   });
 
-  test('should increment counter when button is clicked', async ({ page }) => {
+  test('should navigate to games page', async ({ page }) => {
     await page.goto('/');
 
-    const button = page.locator('button');
+    // Click on Games link in navigation
+    await page.locator('nav a').filter({ hasText: 'Games' }).click();
 
-    // Initial state
-    await expect(button).toContainText('count is 0');
+    // Should be on games page
+    await expect(page).toHaveURL(/.*\/games/);
+    await expect(page.locator('main h1')).toContainText('Games');
+  });
 
-    // Click and verify
-    await button.click();
-    await expect(button).toContainText('count is 1');
+  test('should navigate to tournaments page', async ({ page }) => {
+    await page.goto('/');
 
-    // Click again
-    await button.click();
-    await expect(button).toContainText('count is 2');
+    // Click on Tournaments link in navigation
+    await page.locator('nav a').filter({ hasText: 'Tournaments' }).click();
+
+    // Should be on tournaments page
+    await expect(page).toHaveURL(/.*\/tournaments/);
+    await expect(page.locator('main h1')).toContainText('Tournaments');
   });
 });
 
 test.describe('Game Navigation', () => {
-  test('should handle 404 for unknown routes', async ({ page }) => {
-    const response = await page.goto('/unknown-route');
-    expect(response?.status()).toBe(404);
+  test('should navigate back to home from games page', async ({ page }) => {
+    await page.goto('/games');
+
+    // Click on Home link in navigation
+    await page.locator('nav a').filter({ hasText: 'Home' }).click();
+
+    // Should be back on home page
+    await expect(page).toHaveURL(/.*\/$/);
+    await expect(page.locator('main h1')).toContainText('Space Blitz');
   });
 });
