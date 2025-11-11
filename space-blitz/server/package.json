@@ -13,8 +13,7 @@
     "seed": "npx tsx src/migration/seed.ts",
     "lint": "eslint src/**/*.ts",
     "test": "c8 --reporter=text --reporter=json --reporter=html --report-dir=./coverage --include=src/**/*.ts --exclude=src/**/*.test.ts --exclude=src/**/*.spec.ts --exclude=**/*.config.ts --exclude=scripts/** --exclude=migration/** vitest --run",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@apollo/server": "^5.1.0",
