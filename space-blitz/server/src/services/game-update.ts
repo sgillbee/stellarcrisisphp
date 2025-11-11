@@ -1,5 +1,6 @@
 import { Game, Series } from '../models';
 import { GameEngine } from '../game-engine';
+import { RepositoryFactory } from '../repositories';
 
 /**
  * Service for managing game updates and scheduling
@@ -34,13 +35,16 @@ export class GameUpdateService {
    * Process a single game update
    */
   static async processGameUpdate(game: any): Promise<void> {
+    const unitOfWork = RepositoryFactory.createUnitOfWork();
+    const gameEngine = new GameEngine(unitOfWork);
+
     try {
       const series = game.seriesId;
       const updateTime = new Date();
 
       console.log(`Processing update for game ${game._id} (${game.seriesName} ${game.gameNumber})`);
 
-      const result = await GameEngine.updateGame(series, game, updateTime);
+      const result = await gameEngine.updateGame(series, game, updateTime);
 
       if (result.success) {
         if (result.gameEnded) {
@@ -53,6 +57,8 @@ export class GameUpdateService {
       }
     } catch (error) {
       console.error(`Error processing game ${game._id}:`, error);
+    } finally {
+      await unitOfWork.dispose();
     }
   }
 
@@ -60,6 +66,9 @@ export class GameUpdateService {
    * Manually trigger an update for a specific game (for testing/admin purposes)
    */
   static async triggerGameUpdate(gameId: string): Promise<{ success: boolean; message: string }> {
+    const unitOfWork = RepositoryFactory.createUnitOfWork();
+    const gameEngine = new GameEngine(unitOfWork);
+
     try {
       const game = await Game.findById(gameId).populate('seriesId');
       if (!game) {
@@ -78,6 +87,8 @@ export class GameUpdateService {
         success: false,
         message: error instanceof Error ? error.message : 'Unknown error'
       };
+    } finally {
+      await unitOfWork.dispose();
     }
   }
 

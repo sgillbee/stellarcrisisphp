@@ -1,59 +1,66 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { GameEngine } from '../game-engine';
-import { Game, Series, Player, System, Ship } from '../models';
+import { IUnitOfWork } from '../repositories';
 
-// Import test utilities to setup global mocks
-import '../__tests__/test-utils';
-
-// Mock mongoose models with proper chaining support
-vi.mock('../models', () => ({
-  Game: {
-    findById: vi.fn(),
-    findOne: vi.fn(),
+// Mock repositories
+const mockUnitOfWork = {
+  beginTransaction: vi.fn().mockResolvedValue(undefined),
+  commit: vi.fn().mockResolvedValue(undefined),
+  rollback: vi.fn().mockResolvedValue(undefined),
+  dispose: vi.fn().mockResolvedValue(undefined),
+  games: {
+    updateGameMetadata: vi.fn().mockResolvedValue(undefined),
+    updateGameState: vi.fn().mockResolvedValue(undefined),
   },
-  Series: {
-    findById: vi.fn(),
+  players: {
+    findByGame: vi.fn(),
+    updatePlayerResources: vi.fn().mockResolvedValue(undefined),
+    updatePlayerTech: vi.fn().mockResolvedValue(undefined),
+    updatePlayerStats: vi.fn().mockResolvedValue(undefined),
   },
-  Player: {
-    find: vi.fn(),
-    countDocuments: vi.fn(),
+  ships: {
+    findShipsWithOrders: vi.fn(),
+    findByGame: vi.fn(),
+    findByOwner: vi.fn(),
+    update: vi.fn().mockResolvedValue(undefined),
+    delete: vi.fn().mockResolvedValue(undefined),
+    destroyShips: vi.fn().mockResolvedValue(undefined),
   },
-  System: {
-    find: vi.fn(),
-    findOne: vi.fn(),
+  systems: {
+    findByOwner: vi.fn(),
+    findByCoordinates: vi.fn(),
+    colonizeSystem: vi.fn().mockResolvedValue(undefined),
   },
-  Ship: {
-    find: vi.fn(() => ({
-      session: vi.fn().mockReturnThis(),
-    })),
-    findByIdAndDelete: vi.fn((id) => ({
-      session: vi.fn().mockResolvedValue(undefined),
-    })),
+  messages: {
+    createMessage: vi.fn().mockResolvedValue(undefined),
   },
-}));
+  history: {
+    createHistoryEntry: vi.fn().mockResolvedValue(undefined),
+  },
+};
 
 describe('GameEngine', () => {
+  let gameEngine: GameEngine;
   let mockGame: any;
   let mockSeries: any;
   let mockPlayers: any[];
-  let mockSession: any;
 
   beforeEach(() => {
     vi.clearAllMocks();
 
-    mockSession = {
-      startTransaction: vi.fn(),
-      commitTransaction: vi.fn(),
-      abortTransaction: vi.fn(),
-      endSession: vi.fn(),
-    };
+    // Reset mock implementations
+    mockUnitOfWork.beginTransaction.mockResolvedValue(undefined);
+    mockUnitOfWork.commit.mockResolvedValue(undefined);
+    mockUnitOfWork.rollback.mockResolvedValue(undefined);
+    mockUnitOfWork.dispose.mockResolvedValue(undefined);
+
+    gameEngine = new GameEngine(mockUnitOfWork as any);
 
     mockGame = {
       _id: 'game123',
       seriesId: 'series123',
       updateCount: 0,
       lastUpdate: new Date(),
-      save: vi.fn().mockResolvedValue(undefined),
     };
 
     mockSeries = {
@@ -67,21 +74,38 @@ describe('GameEngine', () => {
         _id: 'player1',
         name: 'Player1',
         team: 1,
-        endedTurn: false,
-        save: vi.fn().mockResolvedValue(undefined),
+        mineral: 100,
+        fuel: 50,
+        agriculture: 25,
+        population: 10,
+        techLevel: 1,
+        techs: [],
+        maintenance: 0,
+        build: 0,
+        fuelUse: 0,
+      },
+      {
+        _id: 'player2',
+        name: 'Player2',
+        team: 1,
+        mineral: 100,
+        fuel: 50,
+        agriculture: 25,
+        population: 10,
+        techLevel: 1,
+        techs: [],
+        maintenance: 0,
+        build: 0,
+        fuelUse: 0,
       },
     ];
 
-    // Setup default mocks
-    (Game.findById as any).mockResolvedValue(mockGame);
-    (Series.findById as any).mockResolvedValue(mockSeries);
-    (Player.find as any).mockResolvedValue(mockPlayers);
-    
-    // Mock Ship.find to return a query that supports .session()
-    const mockShipQuery = {
-      session: vi.fn().mockResolvedValue([]),
-    };
-    (Ship.find as any).mockReturnValue(mockShipQuery);
+    // Setup default mock returns
+    mockUnitOfWork.players.findByGame.mockResolvedValue(mockPlayers);
+    mockUnitOfWork.ships.findShipsWithOrders.mockResolvedValue([]);
+    mockUnitOfWork.ships.findByGame.mockResolvedValue([]);
+    mockUnitOfWork.ships.findByOwner.mockResolvedValue([]);
+    mockUnitOfWork.systems.findByOwner.mockResolvedValue([]);
   });
 
   afterEach(() => {
@@ -90,31 +114,40 @@ describe('GameEngine', () => {
 
   describe('updateGame', () => {
     it('should successfully update a game', async () => {
-      const result = await GameEngine.updateGame(mockSeries, mockGame, new Date());
+      const result = await gameEngine.updateGame(mockSeries, mockGame, new Date());
 
       expect(result.success).toBe(true);
       expect(result.gameEnded).toBe(false);
-      expect(mockGame.updateCount).toBe(1);
-      expect(mockGame.save).toHaveBeenCalled();
+      expect(mockUnitOfWork.games.updateGameMetadata).toHaveBeenCalledWith(
+        'game123',
+        { updateCount: 1, lastUpdate: expect.any(Date) }
+      );
+      expect(mockUnitOfWork.history.createHistoryEntry).toHaveBeenCalled();
+      expect(mockUnitOfWork.commit).toHaveBeenCalled();
     });
 
     it('should handle game end conditions', async () => {
       // Mock only one active player
       mockPlayers[0].team = -1; // Eliminated player
 
-      const result = await GameEngine.updateGame(mockSeries, mockGame, new Date());
+      const result = await gameEngine.updateGame(mockSeries, mockGame, new Date());
 
       expect(result.success).toBe(true);
       expect(result.gameEnded).toBe(true);
+      expect(mockUnitOfWork.games.updateGameState).toHaveBeenCalledWith('game123', {
+        status: 'completed',
+        phase: 'finished'
+      });
     });
 
     it('should handle database errors gracefully', async () => {
-      mockGame.save.mockRejectedValue(new Error('Database error'));
+      mockUnitOfWork.games.updateGameMetadata.mockRejectedValue(new Error('Database error'));
 
-      const result = await GameEngine.updateGame(mockSeries, mockGame, new Date());
+      const result = await gameEngine.updateGame(mockSeries, mockGame, new Date());
 
       expect(result.success).toBe(false);
       expect(result.error).toContain('Database error');
+      expect(mockUnitOfWork.rollback).toHaveBeenCalled();
     });
 
     it('should process ship movements', async () => {
@@ -122,25 +155,25 @@ describe('GameEngine', () => {
         {
           _id: 'ship1',
           orders: 'move',
-          path: ['system1', 'system2'],
+          orderArguments: 'system2',
           location: 'system1',
           fuel: 10,
           fuelCost: 2,
-          save: vi.fn().mockResolvedValue(undefined),
         },
       ];
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue(mockShips),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
+      mockUnitOfWork.ships.findShipsWithOrders.mockResolvedValue(mockShips);
 
-      await GameEngine.updateGame(mockSeries, mockGame, new Date());
+      await gameEngine.updateGame(mockSeries, mockGame, new Date());
 
-      expect(mockShips[0].location).toBe('system2');
-      expect(mockShips[0].fuel).toBe(8);
-      expect(mockShips[0].save).toHaveBeenCalled();
+      expect(mockUnitOfWork.ships.update).toHaveBeenCalledWith('ship1', {
+        _id: 'ship1',
+        orders: 'move',
+        orderArguments: 'system2',
+        location: 'system2',
+        fuel: 8,
+        fuelCost: 2,
+      });
     });
 
     it('should handle ship colonization', async () => {
@@ -154,24 +187,18 @@ describe('GameEngine', () => {
       ];
 
       const mockSystem = {
+        _id: 'system1',
         owner: null,
         population: 0,
-        save: vi.fn().mockResolvedValue(undefined),
       };
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue(mockShips),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
-      
-      (System.findOne as any).mockResolvedValue(mockSystem);
+      mockUnitOfWork.ships.findShipsWithOrders.mockResolvedValue(mockShips);
+      mockUnitOfWork.systems.findByCoordinates.mockResolvedValue(mockSystem);
 
-      await GameEngine.updateGame(mockSeries, mockGame, new Date());
+      await gameEngine.updateGame(mockSeries, mockGame, new Date());
 
-      expect(mockSystem.owner).toBe('Player1');
-      expect(mockSystem.population).toBe(1);
-      expect(mockSystem.save).toHaveBeenCalled();
+      expect(mockUnitOfWork.systems.colonizeSystem).toHaveBeenCalledWith('system1', 'Player1', 1);
+      expect(mockUnitOfWork.ships.delete).toHaveBeenCalledWith('ship1');
     });
 
     it('should resolve combat between ships', async () => {
@@ -190,18 +217,12 @@ describe('GameEngine', () => {
         },
       ];
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue(mockShips),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
-      
-      (Ship.findByIdAndDelete as any).mockResolvedValue(undefined);
+      mockUnitOfWork.ships.findByGame.mockResolvedValue(mockShips);
 
-      await GameEngine.updateGame(mockSeries, mockGame, new Date());
+      await gameEngine.updateGame(mockSeries, mockGame, new Date());
 
-      // The weaker ship should be destroyed
-      expect(Ship.findByIdAndDelete).toHaveBeenCalledWith('ship2');
+      expect(mockUnitOfWork.ships.destroyShips).toHaveBeenCalledWith(['ship2']);
+      expect(mockUnitOfWork.messages.createMessage).toHaveBeenCalled();
     });
 
     it('should calculate player economy', async () => {
@@ -221,73 +242,60 @@ describe('GameEngine', () => {
           orders: 'build',
           buildCost: 10,
           maintenanceCost: 5,
+          fuelCost: 1,
         },
       ];
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue(mockShips),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
-      
-      (System.find as any).mockResolvedValue(mockSystems);
+      mockUnitOfWork.systems.findByOwner.mockResolvedValue(mockSystems);
+      mockUnitOfWork.ships.findByOwner.mockResolvedValue(mockShips);
 
-      await GameEngine.updateGame(mockSeries, mockGame, new Date());
+      await gameEngine.updateGame(mockSeries, mockGame, new Date());
 
-      expect(mockPlayers[0].mineral).toBeDefined();
-      expect(mockPlayers[0].fuel).toBeDefined();
-      expect(mockPlayers[0].agriculture).toBeDefined();
-      expect(mockPlayers[0].save).toHaveBeenCalled();
+      expect(mockUnitOfWork.players.updatePlayerResources).toHaveBeenCalled();
+      expect(mockUnitOfWork.players.updatePlayerTech).toHaveBeenCalled();
     });
   });
 
   describe('processShipMovements', () => {
-    it('should move ships along their path', async () => {
+    it('should move ships to their destination', async () => {
       const mockShip = {
         _id: 'ship1',
         orders: 'move',
-        path: ['system1', 'system2', 'system3'],
+        orderArguments: 'system2',
         location: 'system1',
         fuel: 10,
         fuelCost: 2,
-        save: vi.fn().mockResolvedValue(undefined),
       };
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue([mockShip]),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
+      mockUnitOfWork.ships.findShipsWithOrders.mockResolvedValue([mockShip]);
 
-      await (GameEngine as any).processShipMovements(mockGame, mockPlayers, mockSession);
+      await gameEngine['processShipMovements'](mockGame, mockPlayers);
 
-      expect(mockShip.location).toBe('system2');
-      expect(mockShip.fuel).toBe(8);
-      expect(mockShip.save).toHaveBeenCalled();
+      expect(mockUnitOfWork.ships.update).toHaveBeenCalledWith('ship1', {
+        _id: 'ship1',
+        orders: 'move',
+        orderArguments: 'system2',
+        location: 'system2',
+        fuel: 8,
+        fuelCost: 2,
+      });
     });
 
     it('should destroy ships that run out of fuel', async () => {
       const mockShip = {
         _id: 'ship1',
         orders: 'move',
-        path: ['system1', 'system2'],
+        orderArguments: 'system2',
         location: 'system1',
         fuel: 1,
         fuelCost: 2,
-        save: vi.fn().mockResolvedValue(undefined),
       };
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue([mockShip]),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
-      
-      (Ship.findByIdAndDelete as any).mockResolvedValue(undefined);
+      mockUnitOfWork.ships.findShipsWithOrders.mockResolvedValue([mockShip]);
 
-      await (GameEngine as any).processShipMovements(mockGame, mockPlayers, mockSession);
+      await gameEngine['processShipMovements'](mockGame, mockPlayers);
 
-      expect(Ship.findByIdAndDelete).toHaveBeenCalledWith('ship1');
+      expect(mockUnitOfWork.ships.delete).toHaveBeenCalledWith('ship1');
     });
   });
 
@@ -298,17 +306,12 @@ describe('GameEngine', () => {
         { _id: 'ship2', owner: 'Player2', location: 'system1', br: 5 },
       ];
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue(mockShips),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
-      
-      (Ship.findByIdAndDelete as any).mockResolvedValue(undefined);
+      mockUnitOfWork.ships.findByGame.mockResolvedValue(mockShips);
 
-      await (GameEngine as any).processCombat(mockGame, mockPlayers, mockSession);
+      await gameEngine['processCombat'](mockGame, mockPlayers);
 
-      expect(Ship.findByIdAndDelete).toHaveBeenCalledWith('ship2');
+      expect(mockUnitOfWork.ships.destroyShips).toHaveBeenCalledWith(['ship2']);
+      expect(mockUnitOfWork.messages.createMessage).toHaveBeenCalled();
     });
 
     it('should handle ties by destroying all ships', async () => {
@@ -317,17 +320,11 @@ describe('GameEngine', () => {
         { _id: 'ship2', owner: 'Player2', location: 'system1', br: 5 },
       ];
 
-      // Mock Ship.find to return ships with session
-      const mockShipQuery = {
-        session: vi.fn().mockResolvedValue(mockShips),
-      };
-      (Ship.find as any).mockReturnValue(mockShipQuery);
-      
-      (Ship.findByIdAndDelete as any).mockResolvedValue(undefined);
+      mockUnitOfWork.ships.findByGame.mockResolvedValue(mockShips);
 
-      await (GameEngine as any).processCombat(mockGame, mockPlayers, mockSession);
+      await gameEngine['processCombat'](mockGame, mockPlayers);
 
-      expect(Ship.findByIdAndDelete).toHaveBeenCalledTimes(2);
+      expect(mockUnitOfWork.ships.destroyShips).toHaveBeenCalledWith(['ship1', 'ship2']);
     });
   });
 });
