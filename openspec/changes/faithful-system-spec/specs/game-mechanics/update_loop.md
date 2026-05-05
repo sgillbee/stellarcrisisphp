@@ -36,7 +36,12 @@ High-level phases
 
 8. Post-combat special actions
    - Handle invasion/colonization/terraforming results, troop transport offloads, colony creation or system ownership changes.
-   - Apply nukes: set `systems.annihilated = '1'`, zero population, remove ships; increment player `nukes`/`nuked` counters and write `history` events.
+   - **Nuke**: A Nuke ship with `orders='nuke'` at a system owned by a war enemy executes:
+     - `population = 0, owner = '', homeworld = '', mineral = mineral/2, fuel = fuel/2, agriculture = agriculture/2, max_population = GREATEST(1, max_population/2)`.
+     - Does NOT set `annihilated = '1'`. The system can eventually be re-colonized.
+     - If it was a homeworld, records the elimination.
+   - **Annihilate / Doomsday**: Sets `mineral = 0, fuel = 0, agriculture = 0, max_population = 0, population = 0, owner = '', homeworld = '', annihilated = '1'`. The system is permanently destroyed and cannot be colonized again.
+   - Increment player `nukes`/`nuked` counters and write `history` events.
 
 9. Cleanup & persistence
    - Remove destroyed ships and empty fleets; update `systems.population`, `players.population`, `players.mineral`/`fuel` adjustments; write per-player maintenance/fuel bookkeeping.
